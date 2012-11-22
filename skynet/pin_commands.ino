@@ -1,4 +1,6 @@
-void ExecutePinCommand(byte *input)
+// Digital and Analog Pin Commands
+
+void ExecuteDigitalPinWriteCommand(byte *input)
 {
   if (input[2] == 0)
   {
@@ -15,6 +17,13 @@ void ExecutePinCommand(byte *input)
     // Write error. Not sure when this case would ever happen.
     WritePinState(input[1], STATE_REPLY_ERROR_CODE);
   }
+}
+
+void ExecuteAnalogPinWriteCommand(byte *input)
+{
+  // On this board (UNO), analog write only works on pins
+  // 3, 5, 6, 9, 10 and 11.
+  analogWrite(input[1], input[2]);
 }
 
 void WritePinState(int pinMapping, byte state)
