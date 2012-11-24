@@ -24,10 +24,14 @@ void ExecuteAnalogPinWriteCommand(byte *input)
   // On this board (UNO), analog write only works on pins
   // 3, 5, 6, 9, 10 and 11.
   analogWrite(input[1], input[2]);
+  
+  // RBakerFlag -> Need to send a reply package!
 }
 
 void WritePinState(int pinMapping, byte state)
 {
+  // RBakerFlag -> Need to fix this reply package!
+  
   // Writes the pin state in the form XXXXXXSS, where X
   // is the pin mapping and S is the state.
   byte pinStateCode = byte(pinMapping << 3) + state;
