@@ -1,6 +1,7 @@
 const byte DIGITAL_PIN_WRITE_COMMAND_ID = 1;
 const byte SETTING_COMMAND_ID = 2;
 const byte ANALOG_PIN_WRITE_COMMAND_ID = 3;
+const byte SET_PIN_MODE_COMMAND_ID = 4;
 
 const byte STATE_REPLY_ERROR_CODE = 7; // 00000111
 
@@ -35,8 +36,7 @@ void loop()
 
 void SetOutputPins()
 {
-  // Configure the pins for output.
-  // For now, we're only using pin 13.
+  // Configure the default pins for output.
   pinMode(13, OUTPUT);
 }
 
@@ -55,16 +55,18 @@ void ExecuteCommand(byte *input)
 {
   switch(input[0])
   {
-  // case PIN_COMMAND_ID:
-  case DIGITAL_PIN_WRITE_COMMAND_ID:
-    ExecuteDigitalPinWriteCommand(input);
-    break;
-  case SETTING_COMMAND_ID:
-    ExecuteSettingCommand(input);
-    break;
-  case ANALOG_PIN_WRITE_COMMAND_ID:
-    ExecuteAnalogPinWriteCommand(input);
-    break;
+    case DIGITAL_PIN_WRITE_COMMAND_ID:
+      ExecuteDigitalPinWriteCommand(input);
+      break;
+    case SETTING_COMMAND_ID:
+      ExecuteSettingCommand(input);
+      break;
+    case ANALOG_PIN_WRITE_COMMAND_ID:
+      ExecuteAnalogPinWriteCommand(input);
+      break;
+    case SET_PIN_MODE_COMMAND_ID:
+      ExecuteSetPinModeCommand(input);
+      break;
   }
 }
 
