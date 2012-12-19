@@ -2,8 +2,13 @@ const byte DIGITAL_PIN_WRITE_COMMAND_ID = 1;
 const byte SETTING_COMMAND_ID = 2;
 const byte ANALOG_PIN_WRITE_COMMAND_ID = 3;
 const byte SET_PIN_MODE_COMMAND_ID = 4;
+const byte SET_STEPPER_1_COMMAND_ID = 30;
 
 const byte STATE_REPLY_ERROR_CODE = 7; // 00000111
+
+#include <Stepper.h>
+
+Stepper stepper1(200, 9, 10, 11, 12);
 
 void setup()
 {
@@ -26,6 +31,7 @@ void loop()
     delay(10);
 
     byte input[3];
+    
     input[0] = Serial.read();
     input[1] = Serial.read();
     input[2] = Serial.read();
@@ -67,6 +73,9 @@ void ExecuteCommand(byte *input)
     case SET_PIN_MODE_COMMAND_ID:
       ExecuteSetPinModeCommand(input);
       break;
+    case SET_STEPPER_1_COMMAND_ID:
+      ExecuteSetStepper1Command(input);
+      break;      
   }
 }
 
